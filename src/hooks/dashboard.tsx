@@ -94,7 +94,7 @@ const DashboardProvider: React.FC = ({ children }) => {
   );
   const [pages, setPages] = useState(1);
 
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   const loadDataBalance = useCallback(async () => {
     const { data } = await api.get('balance');
@@ -131,11 +131,15 @@ const DashboardProvider: React.FC = ({ children }) => {
 
   const loadData = useCallback(async () => {
     if (user && user.id) {
-      await loadDataBalance();
-      await loadDataTransactions();
-      await loadDataCharts();
+      try {
+        await loadDataBalance();
+        await loadDataTransactions();
+        await loadDataCharts();
+      } catch {
+        signOut();
+      }
     }
-  }, [loadDataTransactions, loadDataBalance, loadDataCharts, user]);
+  }, [loadDataTransactions, loadDataBalance, loadDataCharts, user, signOut]);
 
   const handleDeleteTransaction = useCallback(
     async (id: number) => {

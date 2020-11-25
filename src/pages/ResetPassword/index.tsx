@@ -13,7 +13,7 @@ import Button from '../../components/Button';
 
 import { useToast } from '../../hooks/toast';
 
-import { Container, DivCreateAccount, RightSide } from './styles';
+import { Container, DivCreateAccount, DivLogout, RightSide } from './styles';
 import api from '../../services/api';
 
 interface IRequest {
@@ -27,6 +27,7 @@ function useQuery() {
 
 const ResetPassword: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const query = useQuery();
 
   const formRef = useRef<FormHandles>(null);
@@ -74,6 +75,7 @@ const ResetPassword: React.FC = () => {
           password: data.password,
           password_confirmation: data.password_confirmation,
           token,
+          logout: isChecked,
         });
 
         addToast({
@@ -99,7 +101,7 @@ const ResetPassword: React.FC = () => {
         setIsLoading(false);
       }
     },
-    [addToast, history, query],
+    [addToast, history, query, isChecked],
   );
 
   return (
@@ -123,7 +125,20 @@ const ResetPassword: React.FC = () => {
             placeholder="Confirme a sua senha"
           />
 
-          <Button type="submit">Enviar</Button>
+          <DivLogout>
+            <label htmlFor="logout">
+              <input
+                type="checkbox"
+                name="logout"
+                id="logout"
+                defaultChecked={isChecked}
+                onChange={() => setIsChecked(!isChecked)}
+              />
+              Deslogar dos outros aparelhos
+            </label>
+          </DivLogout>
+
+          <Button type="submit">Resetar senha</Button>
         </Form>
 
         <DivCreateAccount>

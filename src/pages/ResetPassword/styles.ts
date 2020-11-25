@@ -91,3 +91,19 @@ export const DivCreateAccount = styled.div`
     }
   }
 `;
+
+export const DivLogout = styled.div`
+  display: flex;
+  align-items: center;
+
+  label {
+    display: flex;
+    align-items: center;
+
+    input {
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+`;
