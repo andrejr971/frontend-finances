@@ -123,7 +123,7 @@ const AuthProvider: React.FC = ({ children }) => {
       const dataFile = new FormData();
       dataFile.append('file', file);
 
-      const response = await api.put(`profile/avatar`, dataFile);
+      const response = await api.post(`profile/avatar`, dataFile);
 
       setData({
         user: response.data,
