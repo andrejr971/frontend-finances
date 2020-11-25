@@ -76,7 +76,7 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const signUp = useCallback(async (createUser: IRequestCreateUser) => {
-    await api.post('users', createUser);
+    await api.post('register', createUser);
   }, []);
 
   const updateProfile = useCallback(
@@ -105,7 +105,7 @@ const AuthProvider: React.FC = ({ children }) => {
         });
       }
 
-      const response = await api.put(`users/${data.user.id}`, update);
+      const response = await api.put(`profile`, update);
 
       setData({
         user: response.data,
@@ -123,7 +123,7 @@ const AuthProvider: React.FC = ({ children }) => {
       const dataFile = new FormData();
       dataFile.append('file', file);
 
-      const response = await api.put(`users/${data.user.id}/avatar`, dataFile);
+      const response = await api.put(`profile/avatar`, dataFile);
 
       setData({
         user: response.data,
