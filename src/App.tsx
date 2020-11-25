@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
-function App() {
+import Routes from './routes';
+import AppProvider from './hooks';
+
+import GlobalStyles from './styles/GlobalStyles';
+import { ThemeName, themes } from './styles/themes';
+
+const App: React.FC = () => {
+  const [themeName, setThemeName] = useState<ThemeName>(() => {
+    const themeLocal = localStorage.getItem('@finances:theme');
+
+    if (!themeLocal) {
+      return 'dark';
+    }
+
+    return themeLocal === 'dark' ? 'dark' : 'light';
+  });
+
+  const currentTheme = themes[themeName];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={currentTheme}>
+      <AppProvider setTheme={setThemeName} themeName={themeName}>
+        <BrowserRouter>
+          <Routes />
+          <GlobalStyles />
+        </BrowserRouter>
+      </AppProvider>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
