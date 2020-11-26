@@ -27,14 +27,14 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 No bootcamp GoStack da Rockeseat, devenvolvemos uma aplicação GoFinances, e afim de aperfeiçoar o conhecimento adquirido, resolvi fazer um upgrade na aplicação, assim surgiu o Finances.
 
 
-Link para o [backend](https://github.com/andrejr971/point-counter-back)
+Link para o [backend](https://github.com/andrejr971/backend-finances2.0)
 
 
 <p align="center">
   <img alt="image" src=".github/screen1.png" width="100%">
 </p>
 <p align="center">
-  <img alt="image" src=".github/screen2.png" width="30%">
+  <img alt="image" src=".github/screen2.png" width="100%">
 </p>
 
 ---
